@@ -1,0 +1,11 @@
+# Canonical completed-study checksums
+
+```text
+839f67ecc73b1f539128694badebe27adf4f0fb1ee6d0663b7ad9868100d5123  graph9.g6
+546a249902101c97d3aa590f93e53366854bd0a6f405aa59bdb32d25c57f845a  graph8.g6
+da32bb36f59a8999c735b4d1d585b372d9de665facc1c2ae3e55fb0025516bf1  order9_primary_certificates.tsv
+92c3028274ce50ca21694f598536012ad8f4f1bcd2e1145be6aa7f523dcfcd36  order9_replay_seed8675309_pool20_certificates.tsv
+67ea1f465fa67cd4c7726829b6b977c5766100ab14eb4796d3be630a87b988d9  order8_replication_certificates.tsv
+```
+
+These hashes identify the exact data and certificate archives used in the completed study. `reproduce.sh` checks the decisive order-nine hashes automatically.
