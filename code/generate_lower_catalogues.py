@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Regenerate the exact order-1 through order-7 graph6 catalogues from NetworkX's Graph Atlas."""
+"""Regenerate exact order-1 through order-7 graph6 catalogues from NetworkX's Graph Atlas."""
 from __future__ import annotations
-import argparse
-import hashlib
+import argparse, hashlib
 from pathlib import Path
 import networkx as nx
 
@@ -23,22 +22,22 @@ def digest(path: Path) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument('--data-dir', default='data')
+    ap.add_argument("--data-dir", default="data")
     args = ap.parse_args()
     out = Path(args.data_dir)
     out.mkdir(parents=True, exist_ok=True)
     atlas = nx.graph_atlas_g()
     for n in range(1, 8):
         graphs = [g for g in atlas if g.number_of_nodes() == n]
-        path = out / f'graph{n}.g6'
-        with path.open('wb') as f:
+        path = out / f"graph{n}.g6"
+        with path.open("wb") as f:
             for graph in graphs:
                 f.write(nx.to_graph6_bytes(graph, header=False))
         actual = digest(path)
         if actual != EXPECTED[n]:
-            raise SystemExit(f'graph{n}.g6 hash mismatch: expected {EXPECTED[n]}, got {actual}')
-        print(f'OK graph{n}.g6: {len(graphs)} records, {actual}')
+            raise SystemExit(f"graph{n}.g6 hash mismatch: expected {EXPECTED[n]}, got {actual}")
+        print(f"OK graph{n}.g6: {len(graphs)} records, {actual}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
