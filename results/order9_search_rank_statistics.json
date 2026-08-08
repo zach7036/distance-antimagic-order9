@@ -1,0 +1,15 @@
+{
+  "eligible_graphs": 205914,
+  "mean_search_rank": 4.274736054857853,
+  "median_search_rank": 3.0,
+  "p90_nearest_rank": 9,
+  "p95_nearest_rank": 12,
+  "p99_nearest_rank": 20,
+  "maximum_search_rank": 98,
+  "rank_1_count": 47687,
+  "rank_1_fraction": 0.2315869732024049,
+  "rank_at_most_10_count": 191540,
+  "rank_at_most_10_fraction": 0.9301941587264586,
+  "rank_at_most_20_count": 203892,
+  "rank_at_most_20_fraction": 0.9901803665607972
+}
