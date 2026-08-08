@@ -1,0 +1,33 @@
+{
+  "implementation": "Python standard library only; independent graph6 decoder; direct exhaustive permutation loop partitioned by vertex-0 label",
+  "processes": 1,
+  "permutations_enumerated": 362880,
+  "graph_labeling_pairs_checked": 1451520,
+  "all_agree": true,
+  "rows": [
+    {
+      "graph6": "H?bB@_W",
+      "observed_count": 17190,
+      "expected_vectorized_count": 17190,
+      "agreement": true
+    },
+    {
+      "graph6": "HCQe`pk",
+      "observed_count": 18818,
+      "expected_vectorized_count": 18818,
+      "agreement": true
+    },
+    {
+      "graph6": "HCQe`pg",
+      "observed_count": 22269,
+      "expected_vectorized_count": 22269,
+      "agreement": true
+    },
+    {
+      "graph6": "H~~~~~~",
+      "observed_count": 362880,
+      "expected_vectorized_count": 362880,
+      "agreement": true
+    }
+  ]
+}

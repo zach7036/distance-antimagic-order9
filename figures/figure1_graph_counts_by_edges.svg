@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="430" viewBox="0 0 960 430" role="img" aria-labelledby="title desc">
+  <title id="title">Complete order-nine graph census</title>
+  <desc id="desc">Horizontal bars show 274,668 total graph classes, 205,914 with distinct open neighborhoods, and 68,754 with a repeated open neighborhood.</desc>
+  <rect width="960" height="430" fill="white"/>
+  <text x="480" y="48" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="700">Complete order-nine graph census</text>
+  <text x="480" y="78" text-anchor="middle" font-family="sans-serif" font-size="16">All 274,668 unlabeled simple graph classes were classified</text>
+  <g font-family="sans-serif" font-size="17">
+    <text x="30" y="145">All graph classes</text>
+    <rect x="260" y="118" width="650" height="38" rx="4" fill="#4f6d8a"/>
+    <text x="895" y="144" text-anchor="end" fill="white" font-weight="700">274,668</text>
+    <text x="30" y="225">Distinct open neighborhoods</text>
+    <rect x="260" y="198" width="487" height="38" rx="4" fill="#2f8f5b"/>
+    <text x="730" y="224" text-anchor="end" fill="white" font-weight="700">205,914</text>
+    <text x="30" y="305">Repeated open neighborhood</text>
+    <rect x="260" y="278" width="163" height="38" rx="4" fill="#b35c44"/>
+    <text x="410" y="304" text-anchor="end" fill="white" font-weight="700">68,754</text>
+  </g>
+  <line x1="260" y1="345" x2="910" y2="345" stroke="#333" stroke-width="1"/>
+  <g font-family="sans-serif" font-size="13" fill="#333">
+    <text x="260" y="370" text-anchor="middle">0</text>
+    <text x="477" y="370" text-anchor="middle">100,000</text>
+    <text x="693" y="370" text-anchor="middle">200,000</text>
+    <text x="910" y="370" text-anchor="middle">300,000</text>
+  </g>
+  <text x="480" y="410" text-anchor="middle" font-family="sans-serif" font-size="14">The 205,914 eligible classes all received independently verified distance-antimagic certificates.</text>
+</svg>
