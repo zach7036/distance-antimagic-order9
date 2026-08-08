@@ -7,11 +7,11 @@ This repository publishes the completed computational study **“Exhaustive Veri
 
 **[Read the paper](paper/study.md)** · **[Results summary](RESULTS.md)** · **[Reproduce the computation](#reproduction)**
 
-![Order-nine graph census](figures/figure1_graph_counts_by_edges.svg)
+![Complete order-nine graph census](figures/figure1_graph_counts_by_edges.svg)
 
 ## Principal result
 
-A simple graph is distance-antimagic when its vertices can be bijectively labeled `1,...,n` so that every open-neighborhood label sum is different. If two vertices have identical open neighborhoods, equal weights are unavoidable. The computation establishes that this obvious obstruction is the **only** obstruction for every simple graph through order nine.
+A simple graph is distance-antimagic when its vertices can be bijectively labeled `1,...,n` so that every open-neighborhood label sum is different. If two vertices have identical open neighborhoods, equal weights are unavoidable. The computation establishes that this obstruction is the **only** obstruction for every simple graph through order nine.
 
 > **Finite theorem.** Every simple graph with at most nine vertices is distance-antimagic if and only if its open neighborhoods are pairwise distinct.
 >
@@ -23,25 +23,29 @@ See [`RESULTS.md`](RESULTS.md) for the quantitative checks and [`paper/study.md`
 
 ## Transparent publication layout
 
-This repo intentionally contains **no opaque base64/gzip bootstrap payloads and no GitHub Actions workflows**. Everything committed here is ordinary inspectable source, text data/results, or SVG.
+This repository intentionally contains **no opaque base64/gzip bootstrap payloads and no GitHub Actions workflows**. Everything committed here is ordinary inspectable source, Markdown, CSV/TSV/JSON, or SVG.
 
-The two ~13 MB complete certificate TSVs are not hidden inside encoded blobs. They are reproduced deterministically from the C++ constructor instead. Their expected SHA-256 digests are published in [`results/CERTIFICATES.md`](results/CERTIFICATES.md), and a human-readable sample is committed as [`results/order9_certificate_sample.tsv`](results/order9_certificate_sample.tsv). The authoritative 2.2 MB order-nine graph catalogue is likewise downloaded directly from Brendan McKay's ANU collection and hash-checked before use.
+The two approximately 13 MB complete certificate TSVs are not hidden inside encoded blobs. They are regenerated deterministically from the published C++ constructor. Their expected SHA-256 digests are published in [`results/CERTIFICATES.md`](results/CERTIFICATES.md), and a human-readable sample is committed as [`results/order9_certificate_sample.tsv`](results/order9_certificate_sample.tsv). The authoritative order-nine graph catalogue is downloaded directly from Brendan McKay's ANU collection and hash-checked before use.
 
 ## Reproduction
 
-Requirements for the central computation: Python 3 and a C++20 compiler. NetworkX is optional for the second verifier.
+Requirements for the central computation are Python 3 and a C++20 compiler. NetworkX is optional for the second verifier.
 
 ```bash
 # Optional: install the exact Python packages used in the completed study
 python3 -m pip install -r requirements.txt
 
-# Download + hash-check graph9.g6, rebuild the constructor, regenerate
-# the canonical 205,914-row certificate archive, verify its byte-level
-# SHA-256, and independently replay every certificate.
-./reproduce.sh primary
+# Download and hash-check graph9.g6, rebuild the constructor, regenerate
+# the canonical 205,914-row certificate archive, verify its SHA-256,
+# and independently replay every certificate.
+bash reproduce.sh primary
 
-# Also run the different-seed replay and lower-order reproduction.
-./reproduce.sh full
+# Also run the different-seed replay, lower-order replication,
+# and exact hard-case witness-count checks.
+bash reproduce.sh full
+
+# Optional slower pure-Python recount of four representative cases.
+RUN_SLOW_RECOUNT=1 bash reproduce.sh full
 ```
 
 The canonical outputs are expected to satisfy:
@@ -51,29 +55,27 @@ The canonical outputs are expected to satisfy:
 da32bb36f59a8999c735b4d1d585b372d9de665facc1c2ae3e55fb0025516bf1  generated/order9_primary_certificates.tsv
 ```
 
-The graph catalogue is fetched from <https://users.cecs.anu.edu.au/~bdm/data/graph9.g6>. The downloader checks the digest before the constructor is allowed to run.
-
 ## Repository map
 
 ```text
-paper/study.md                  complete research paper
-code/                           constructor, two verifiers, analyses
-data/                           tiny lower-order catalogues + provenance
-results/                        census, audits, exact counts, certificate sample
-figures/                        publication figures as transparent SVG
-reproduce.sh                    local deterministic reproduction workflow
+paper/                           completed research paper, split into inspectable sections
+code/                            constructor, two verifiers, catalogue and exact-count tools
+data/                            catalogue provenance; generated/downloaded catalogues are ignored
+results/                         census, audits, exact counts, novelty log, certificate sample
+figures/                         compact publication figure as transparent SVG
+reproduce.sh                     local deterministic reproduction workflow
 ```
 
 ## Scope and novelty
 
-Previous exhaustive work reported verification through order eight. A result-specific literature search performed after the computation did not locate an earlier exhaustive order-nine verification or a complete order-nine certificate construction. The study therefore **appears to be a previously unreported computational extension** as of 8 August 2026. This is deliberately qualified: unindexed/private work cannot be ruled out, and the manuscript has not yet undergone external peer review.
+Previous exhaustive work reported verification through order eight. A result-specific literature search performed after the computation did not locate an earlier exhaustive order-nine verification or complete order-nine certificate construction. The study therefore **appears to be a previously unreported computational extension** as of 8 August 2026. This is deliberately qualified: unindexed or private work cannot be ruled out, and the manuscript has not yet undergone external peer review.
 
 The significance is best described as a **meaningful incremental frontier result**, not a resolution of the full conjecture.
 
 ## Key source references
 
 - N. Kamatchi and S. Arumugam, *Distance Antimagic Graphs*, JCMCC 84 (2013), 61–67.
-- R. Simanjuntak et al., *Another Antimagic Conjecture*, Symmetry 13 (2021), 2071. DOI: 10.3390/sym13112071.
+- R. Simanjuntak et al., *Another Antimagic Conjecture*, *Symmetry* 13 (2021), 2071. DOI: 10.3390/sym13112071.
 - B. D. McKay, [Combinatorial Data: Simple Graphs](https://users.cecs.anu.edu.au/~bdm/data/graphs.html).
 
 The complete bibliography is in the paper.
