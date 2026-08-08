@@ -1,0 +1,10 @@
+order,all_graphs,point_determining,repeated_neighborhood,connected_point_determining,disconnected_point_determining,certificates_verified,failures
+1,1,1,0,1,0,1,0
+2,2,1,1,1,0,1,0
+3,4,2,2,1,1,2,0
+4,11,5,6,3,2,5,0
+5,34,16,18,11,5,16,0
+6,156,78,78,61,17,78,0
+7,1044,588,456,507,81,588,0
+8,12346,8047,4299,7442,605,8047,0
+9,274668,205914,68754,197772,8142,205914,0
