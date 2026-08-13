@@ -1,81 +1,114 @@
-# Distance-antimagic conjecture through order nine
+# Distance-Antimagic Research Suite
 
-[![Status: computational result](https://img.shields.io/badge/status-computational%20result-blue)](#principal-result)
-[![Peer review: not yet](https://img.shields.io/badge/peer%20review-not%20yet-lightgrey)](#scope-and-novelty)
+**Release:** 1.1.0 (August 13, 2026)  
+**Author:** Zach Waddle  
+**Status:** publication drafts and reproducibility materials; not yet peer reviewed
 
-This repository publishes the completed computational study **“Exhaustive Verification of the Distance-Antimagic Open-Neighborhood Conjecture Through Order Nine.”**
+This repository is the public home for a connected program of research on distance-antimagic graph labelings. It began as the exhaustive order-nine computation and now also contains two proof-based manuscripts on universal labelings and nonlinear finite-field constructions.
 
-**[Read the paper](paper/study.md)** · **[Results summary](RESULTS.md)** · **[Reproduce the computation](#reproduction)**
+No GitHub Actions workflows are used. Verification is intended to be run explicitly and locally.
 
-![Complete order-nine graph census](figures/figure1_graph_counts_by_edges.svg)
+## Main results
 
-## Principal result
+### Paper 1 — Universal labelings
 
-A simple graph is distance-antimagic when its vertices can be bijectively labeled `1,...,n` so that every open-neighborhood label sum is different. If two vertices have identical open neighborhoods, equal weights are unavoidable. The computation establishes that this obstruction is the **only** obstruction for every simple graph through order nine.
+**Universal Distance-Antimagic Labelings: Cyclic Tests, Signed-Sum Intervals, and Complementary Neighborhoods**
 
-> **Finite theorem.** Every simple graph with at most nine vertices is distance-antimagic if and only if its open neighborhoods are pairwise distinct.
->
-> **Corollary.** Any counterexample to the general Kamatchi–Arumugam conjecture must have at least 10 vertices.
+Source: [`paper1_universal/main.tex`](paper1_universal/main.tex)
 
-For order nine, all **274,668** unlabeled simple graph classes were processed. Exactly **205,914** have pairwise-distinct open neighborhoods; every one received an explicit distance-antimagic labeling. The remaining **68,754** have a repeated open neighborhood and therefore fail necessarily. Two independent verifiers accepted all 205,914 positive certificates with **zero failures**.
+Among the results proved in the manuscript:
 
-See [`RESULTS.md`](RESULTS.md) for the quantitative checks and [`paper/study.md`](paper/study.md) for the complete methods, literature review, limitations, and novelty analysis.
+1. Every bijection `V(G) -> Z_n` is distance antimagic iff every bijection into every abelian group of order `n` is distance antimagic.
+2. The only graphs with that all-group/all-labeling property are `K_n` and, for even `n`, the perfect matching.
+3. Universal cyclic subset-sum systems with at least three members are exactly Johnson stars and tops.
+4. The signed sums of two disjoint subsets of `[n]` with prescribed cardinalities are determined exactly, yielding the cancellation/range/parity criterion for pairs separated under every ordinary integer labeling.
+5. Structural consequences include exact classifications for cluster graphs and forests, joined clique–matching families, and an infinite connected non-cograph family; order 10 is the first possible non-cograph order.
+6. For `F_2^m`, a pair is separated under every labeling exactly at neighborhood-row Hamming distance `2` or `2^m-2`; the universal graphs are exactly Seidel switchings of `K_(2^m)` or a perfect matching.
+7. Inverse-closed Cayley anti-periods and a connected twin-free phantom-period obstruction family are classified/constructed.
 
-## Transparent publication layout
+The cyclic additive step uses Zoltan Lorant Nagy's classification of zero permutational sums. The fixed noncyclic pair problem for general groups of exponent greater than two remains explicitly open.
 
-This repository intentionally contains **no opaque base64/gzip bootstrap payloads and no GitHub Actions workflows**. Everything committed here is ordinary inspectable source, Markdown, CSV/TSV/JSON, or SVG.
+### Paper 2 — Nonlinear finite-field constructions
 
-The two approximately 13 MB complete certificate TSVs are not hidden inside encoded blobs. They are regenerated deterministically from the published C++ constructor. Their expected SHA-256 digests are published in [`results/CERTIFICATES.md`](results/CERTIFICATES.md), and a human-readable sample is committed as [`results/order9_certificate_sample.tsv`](results/order9_certificate_sample.tsv). The authoritative order-nine graph catalogue is downloaded directly from Brendan McKay's ANU collection and hash-checked before use.
+**Nonlinear Group-Distance-Antimagic Labelings from Affine-Line Filters**
 
-## Reproduction
+Source: [`paper2_finite_field/main.tex`](paper2_finite_field/main.tex)
 
-Requirements for the central computation are Python 3 and a C++20 compiler. NetworkX is optional for the second verifier.
+The manuscript develops translation-sum/Hasse-derivative filters that send nonlinear permutation monomials to permutation weight maps. Results include:
+
+1. a general paired affine-line norm criterion;
+2. a connected `4p`-regular dimension-three family on `F_(p^3)` for `p != 4 (mod 7)`;
+3. scalar-weight constructions in every admissible even dimension at least four;
+4. root-of-unity balancing in every fixed odd dimension at least five for infinitely many primes;
+5. therefore nonlinear escapes in every dimension `m >= 3` for infinitely many odd characteristics;
+6. a dimension-two impossibility theorem for the full affine-line architecture;
+7. explicit checked certificates over `F_27`, `F_(7^4)`, and an `F_(11^5)` example.
+
+The finite-field identities themselves are classical in character; the proposed contribution is their systematic graph-labeling application.
+
+### Paper 3 — Exhaustive order-nine theorem
+
+The original repository materials establish the finite theorem:
+
+> A simple graph on at most nine vertices is distance antimagic iff its open neighborhoods are pairwise distinct.
+
+For order nine, all **274,668** unlabeled simple graph classes were classified. Exactly **205,914** have distinct open neighborhoods and every one received an explicit labeling certificate; the remaining **68,754** fail by the repeated-neighborhood obstruction. Two independent verifiers accepted every positive certificate with zero failures.
+
+See [`ORDER9_README.md`](ORDER9_README.md), [`RESULTS.md`](RESULTS.md), [`paper/`](paper/), [`code/`](code/), [`data/`](data/), and [`results/`](results/) for the original order-nine publication and reproduction layout.
+
+## Verification
+
+Proof-regression and construction checks for Papers 1–2 are in [`verification/`](verification/). The archived test suite covers, among other things:
+
+- exact signed-sum supports and constructive witnesses;
+- universal cyclic and integer labeling tests on every atlas graph through order seven;
+- structural integer families and the non-cograph frontier;
+- elementary-abelian-2 pair and switching theory;
+- anti-period and phantom-period families;
+- exponent/gcd reductions and root-of-unity scalar constructions;
+- explicit finite-field certificates.
+
+The order-nine computation retains its original deterministic reproduction workflow:
 
 ```bash
-# Optional: install the exact Python packages used in the completed study
-python3 -m pip install -r requirements.txt
-
-# Download and hash-check graph9.g6, rebuild the constructor, regenerate
-# the canonical 205,914-row certificate archive, verify its SHA-256,
-# and independently replay every certificate.
 bash reproduce.sh primary
-
-# Also run the different-seed replay, lower-order replication,
-# and exact hard-case witness-count checks.
-bash reproduce.sh full
-
-# Optional slower pure-Python recount of four representative cases.
-RUN_SLOW_RECOUNT=1 bash reproduce.sh full
 ```
 
-The canonical outputs are expected to satisfy:
+For Papers 1–2, install the small Python dependency set with:
 
-```text
-839f67ecc73b1f539128694badebe27adf4f0fb1ee6d0663b7ad9868100d5123  data/graph9.g6
-da32bb36f59a8999c735b4d1d585b372d9de665facc1c2ae3e55fb0025516bf1  generated/order9_primary_certificates.tsv
+```bash
+python3 -m pip install -r verification/requirements.txt
 ```
+
+and run the individual `verification/verify_*.py` programs.
 
 ## Repository map
 
 ```text
-paper/                           completed research paper, split into inspectable sections
-code/                            constructor, two verifiers, catalogue and exact-count tools
-data/                            catalogue provenance; generated/downloaded catalogues are ignored
-results/                         census, audits, exact counts, novelty log, certificate sample
-figures/                         compact publication figure as transparent SVG
-reproduce.sh                     local deterministic reproduction workflow
+paper1_universal/       universal/group/integer theorem manuscript
+paper2_finite_field/    nonlinear finite-field construction manuscript
+verification/           theorem and construction regression checks
+notes/                  publication, literature, and proof-audit records
+paper/                   original order-nine paper materials
+code/                    order-nine constructor and verifiers
+data/                    order-nine catalogue provenance
+results/                 order-nine results and certificate metadata
+figures/                 order-nine figures
+ORDER9_README.md         preserved original repository README
+RELEASE_NOTES.md         current research-suite release notes
+CITATION.cff             citation metadata
 ```
 
-## Scope and novelty
+## Scope
 
-Previous exhaustive work reported verification through order eight. A result-specific literature search performed after the computation did not locate an earlier exhaustive order-nine verification or complete order-nine certificate construction. The study therefore **appears to be a previously unreported computational extension** as of 8 August 2026. This is deliberately qualified: unindexed or private work cannot be ruled out, and the manuscript has not yet undergone external peer review.
+These results do **not** solve the Kamatchi–Arumugam conjecture in general. The order-nine theorem moves its computational frontier; the universal-labeling and finite-field papers address different, stronger or group-valued quantifier regimes.
 
-The significance is best described as a **meaningful incremental frontier result**, not a resolution of the full conjecture.
+The manuscripts are rigorous research drafts, not peer-reviewed publications. Priority remains provisional pending specialist/database review. The repository records known corrections, failed intermediate claims, proof repairs, and computational checks rather than hiding them.
 
-## Key source references
+## AI/computational assistance
 
-- N. Kamatchi and S. Arumugam, *Distance Antimagic Graphs*, JCMCC 84 (2013), 61–67.
-- R. Simanjuntak et al., *Another Antimagic Conjecture*, *Symmetry* 13 (2021), 2071. DOI: 10.3390/sym13112071.
-- B. D. McKay, [Combinatorial Data: Simple Graphs](https://users.cecs.anu.edu.au/~bdm/data/graphs.html).
+Large language models, computer algebra, exhaustive enumeration, SAT/search experiments, and exact verification code were used during exploration, error detection, proof auditing, and drafting. No AI system is an author. Every retained mathematical claim is supported by a written proof, explicit computation, or cited literature; the human author is responsible for release and submission.
 
-The complete bibliography is in the paper.
+## Citation and licensing
+
+See [`CITATION.cff`](CITATION.cff), [`LICENSE-CODE.txt`](LICENSE-CODE.txt), [`LICENSE-DOCUMENTATION.txt`](LICENSE-DOCUMENTATION.txt), and [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
